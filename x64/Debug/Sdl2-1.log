@@ -1,0 +1,5 @@
+﻿  Draw.cpp
+D:\Sdl2\Sdl2-1\Sdl2-1\Draw.cpp(73,17): warning C4101: 'b': unreferenced local variable
+D:\Sdl2\Sdl2-1\Sdl2-1\Draw.cpp(73,14): warning C4101: 'g': unreferenced local variable
+D:\Sdl2\Sdl2-1\Sdl2-1\Draw.cpp(73,11): warning C4101: 'r': unreferenced local variable
+  Sdl2-1.vcxproj -> D:\Sdl2\Sdl2-1\x64\Debug\Sdl2-1.exe
