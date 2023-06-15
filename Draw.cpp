@@ -20,7 +20,7 @@ public:
 
 
     void drawPoint() {
-        SDL_SetRenderDrawColor(rend, 255, 0, 0, 255);
+        SDL_SetRenderDrawColor(rend, 0, 255, 0, 255);
         SDL_RenderDrawPoint(rend, posX, posY);
     
     }
@@ -47,7 +47,7 @@ public:
 
 
 
-        SDL_SetRenderDrawColor(rend, 255, 0, 0, 255);
+        SDL_SetRenderDrawColor(rend, 255, 255, 255, 255);
         SDL_RenderFillRect(rend,&rect);
 
     }
@@ -64,7 +64,7 @@ int main()
 
     SDL_CreateWindowAndRenderer(
 
-        783 , 783,
+        300 , 300,
         0, &window, &rend);
 
 
@@ -72,16 +72,9 @@ int main()
 
     float r, g, b;
 
-    std::vector<std::vector<int>> board;
-
-    for (int i = 0;i < 783; i++) {
-        for (int j = 0;j < 783; j++) {
-            board[j].push_back(1);
-        }
-    }
+    
 
 
-   std::cout << board[12][12] << std::endl;
 
 
     SDL_Rect rect;
@@ -122,7 +115,18 @@ int main()
                     running = false;
                 }
 
+                if (e.key.keysym.sym == SDLK_LCTRL) {
+
+                    SDL_Surface *sshot = SDL_CreateRGBSurface(0, 300,300, 32, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
+                    SDL_RenderReadPixels(rend, NULL, SDL_PIXELFORMAT_ARGB8888, sshot->pixels, sshot->pitch);
+                    SDL_SaveBMP(sshot, "screenshot.bmp");
+                    SDL_FreeSurface(sshot);
+                }
+
+                 
             }
+
+            
 
             if (e.type == SDL_MOUSEMOTION) {
                 if (flag) {
@@ -141,7 +145,7 @@ int main()
                     CustomRect rect1(rend, rect);
                     rects.push_back(rect1);
 
-                    //boardMatrix[posX][posY] = 1;
+                   
 
                 }
                     
@@ -149,8 +153,7 @@ int main()
             }
             if (e.type == SDL_MOUSEBUTTONDOWN) {
                 if (e.button.button == SDL_BUTTON_LEFT) {
-                    if (flag) flag = false;
-                    else flag = true;
+                    flag = true;
 
                 }
 
@@ -161,12 +164,21 @@ int main()
                 }
             }
 
+            if (e.type == SDL_MOUSEBUTTONUP) {
+                if (e.button.button == SDL_BUTTON_LEFT) {
+                    flag = false;
+
+                }
+
+               
+            }
+
 
 
 
         }
 
-        SDL_SetRenderDrawColor(rend, 255, 255, 255, 255);
+        SDL_SetRenderDrawColor(rend, 0, 0, 0, 255);
         SDL_RenderClear(rend);
 
         for (int i = 0; i < rects.size(); i++) {
